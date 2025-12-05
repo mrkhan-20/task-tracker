@@ -2,6 +2,10 @@
 
 A full-stack task tracking application with FastAPI backend and React frontend.
 
+## Demo Video
+
+[Watch the demo video here] https://www.loom.com/share/5ef598ab593e4328aa9ba7c2e4295129
+
 ## Prerequisites
 
 - Python 3.14+
