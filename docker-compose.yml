@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: tasktracker-db
+    restart: always
+    env_file: .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: tasktracker-backend
+    restart: always
+    depends_on:
+      - db
+    env_file: .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app
+
+  frontend:
+    build: ./frontend
+    container_name: tasktracker-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  postgres_data:
